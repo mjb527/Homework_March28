@@ -100,6 +100,7 @@ function start(event) {
   loadQuestion();
 
   // display the questions when start is clicked
+  document.getElementById('scorecard').style.display = "none";
   document.querySelector('#start-screen').style.display = 'none';
   document.querySelector('#question-box').style.display = 'flex';
   // start timer
@@ -186,7 +187,7 @@ function gameover() {
 
   // get the top 5 scores
   let highscoresOBJ = null;
-  let highsocres = null;
+  let highscores = null;
   if(localStorage.getItem('highscores') !== null) {
     highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
     highscores = [JSON.parse(highscoresOBJ['1']), JSON.parse(highscoresOBJ['2']), JSON.parse(highscoresOBJ['3']), JSON.parse(highscoresOBJ['4']), JSON.parse(highscoresOBJ['5'])];
