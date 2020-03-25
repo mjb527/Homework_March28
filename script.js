@@ -185,15 +185,20 @@ function gameover() {
   document.getElementById('time-remaining').innerHTML = timeLeft + " second(s) left";
 
   // get the top 5 scores
-  const highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
-  let highscores = [JSON.parse(highscoresOBJ['1']), JSON.parse(highscoresOBJ['2']), JSON.parse(highscoresOBJ['3']), JSON.parse(highscoresOBJ['4']), JSON.parse(highscoresOBJ['5'])];
-  console.log(highscores[4]);
+  let highscoresOBJ = null;
+  let highsocres = null;
+  if(localStorage.getItem('highscores') !== null) {
+    highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
+    highscores = [JSON.parse(highscoresOBJ['1']), JSON.parse(highscoresOBJ['2']), JSON.parse(highscoresOBJ['3']), JSON.parse(highscoresOBJ['4']), JSON.parse(highscoresOBJ['5'])];
+  }
+
+  // console.log(highscores[4]);
 
   let currHighscore = (correct * timeLeft);
 
   // if highscores is undefined, set it to be the highest
-  if(highscores === undefined || highscores === null) {
-    const name = prompt("You got a high score! What's your name?");
+  if(highscores === null) {
+    const name = prompt("You got the highest score! What's your name?");
     const info = JSON.stringify({'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore});
     console.log(info);
     const placeholder = JSON.stringify({'name' : ' -- ', 'correct' : 0, 'incorrect' : 0, 'timeLeft' : 0, 'highscore' : 0});
