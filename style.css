@@ -1,0 +1,59 @@
+
+body {
+  overflow: hidden;
+}
+
+#background {
+  width: 100%;
+  height: 100vh;
+  background-image: url(static/background-img.jpeg);
+  opacity: 0.7;
+  z-index: -1;
+  position: fixed;
+}
+
+.container {
+  z-index: 2;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid grey;
+  opactiy: 1;
+}
+
+#header, #header a, .card-header, .btn {
+  background-color: #6600cc;
+  color: white
+}
+
+#question-box {
+  display: none;
+}
+
+#scorecard {
+  display: none;
+}
+
+.answer-choice {
+  z-index: 2;
+  background-color: lightgrey;
+  border-radius: 5px;
+
+}
+
+.answer-choice:hover {
+  color: white;
+  background-color: #6600cc;
+}
+
+@media screen and (min-width: 600px) {
+  #space {
+    height: 70px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #space {
+    height: 0;
+  }
+
+}
