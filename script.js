@@ -108,7 +108,7 @@ function start(event) {
 
 function checkAnswer(event) {
   event.preventDefault();
-  if(event.originalTarget.innerHTML === question.correct) {
+  if(event.target.innerHTML === question.correct) {
     correct++;
     timeLeft += 3;
   }
