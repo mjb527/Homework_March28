@@ -192,6 +192,8 @@ function gameover() {
   document.getElementById('time-remaining').innerHTML = timeLeft + " second(s) left";
 
 
+  let name = 'Anonymous';
+
   if (timeLeft > 0) {
     // get the top 5 scores
     let highscoresOBJ = null;
@@ -208,7 +210,7 @@ function gameover() {
 
     // if highscores is undefined, set it to be the highest
     if(highscores === null) {
-      const name = prompt("You got the highest score! What's your name?");
+      name = prompt("You got the highest score! What's your name?");
       const info = {'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore};
       const placeholder = {'name' : ' -- ', 'correct' : 0, 'incorrect' : 0, 'timeLeft' : 0, 'highscore' : 0};
 
@@ -218,7 +220,7 @@ function gameover() {
     // high score is calculated by multiplying the number correct by the seconds left
     // in case of win somewhere
     else if (currHighscore > highscores[4].highscore) {
-      const name = prompt("You got a high score! What's your name?");
+      name = prompt("You got a high score! What's your name?");
       const info = {'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore};
 
       for(let i = 4; i > -1; i--) {
