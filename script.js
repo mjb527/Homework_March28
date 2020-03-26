@@ -75,7 +75,7 @@ let questionIndex;// = 0;
 let correctResponse = "";
 
 // timer stuff
-let timeLeft = 60;
+let timeLeft = 30;
 let timer;
 const timeEl = document.getElementById('timer');
 
