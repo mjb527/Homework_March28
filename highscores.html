@@ -22,9 +22,6 @@
         <div class="col-md-6 col-sm-12">
           <a href="index.html">Take the quiz</a>
         </div>
-        <div class="col-md-6 col-sm-12 text-right">
-          <span id="timer"></span>
-        </div>
       </div>
 
       <div class="row" id="no-games">
@@ -45,6 +42,8 @@
 
 
       <table class="table">
+        <h4 class='mt-2'>Highscores</h4>
+        <caption>Highscores</caption>
         <thead>
           <tr>
             <th scope="col">Place</th>
@@ -74,8 +73,6 @@
       highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
       highscores = [ highscoresOBJ['0'], highscoresOBJ['1'], highscoresOBJ['2'], highscoresOBJ['3'], highscoresOBJ['4']];
 
-      console.log(highscores);
-
       const table = document.getElementById('highscores');
 
       for(let i = 0; i < highscores.length; i++) {
@@ -94,6 +91,7 @@
 
     else {
       document.querySelector('table').style.display = 'none';
+      document.querySelector('.mt-2').style.display = 'none';
       document.querySelector('#no-games').style.display = 'flex';
     }
 

@@ -199,7 +199,7 @@ function gameover() {
     if(localStorage.getItem('highscores') !== null) {
       highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
       console.log(highscoresOBJ);
-      highscores = [highscoresOBJ['0'], highscoresOBJ['1'], highscoresOBJ['2'], highscoresOBJ['3'], highscoresOBJ['4']];
+      highscores = [ highscoresOBJ['0'], highscoresOBJ['1'], highscoresOBJ['2'], highscoresOBJ['3'], highscoresOBJ['4']];
     }
 
     // console.log(highscores[4]);
@@ -212,7 +212,7 @@ function gameover() {
       const info = {'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore};
       const placeholder = {'name' : ' -- ', 'correct' : 0, 'incorrect' : 0, 'timeLeft' : 0, 'highscore' : 0};
 
-      localStorage.setItem('highscores',JSON.stringify({1:info, 2:placeholder, 3:placeholder, 4:placeholder, 5:placeholder}));
+      localStorage.setItem('highscores',JSON.stringify({0:info, 1:placeholder, 2:placeholder, 3:placeholder, 4:placeholder}));
     }
 
     // high score is calculated by multiplying the number correct by the seconds left
