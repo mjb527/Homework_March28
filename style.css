@@ -45,6 +45,10 @@ body {
   background-color: #6600cc;
 }
 
+#no-games {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   #space {
     height: 70px;

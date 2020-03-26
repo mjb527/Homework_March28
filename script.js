@@ -82,7 +82,12 @@ const timeEl = document.getElementById('timer');
 // prevent right click to help prevent cheating
 document.addEventListener('contextmenu', event => event.preventDefault());
 document.querySelector('#start-button').addEventListener('click', start, event);
-document.querySelector('#restart').addEventListener('click', start, event);
+
+document.querySelector('#restart').addEventListener('click', function(event) {
+  event.preventDefault();
+  location.reload();
+  return false;
+}, event);
 
 // add event listener to each answer-choice in the card
 const answerChoices = document.getElementsByClassName('answer-choice');
@@ -149,7 +154,6 @@ function loadQuestion() {
 
 function countdown() {
   if(timeLeft <= 0) {
-    clearTimeout(timer);
     gameover();
   }
   else {
@@ -159,6 +163,9 @@ function countdown() {
 }
 
 function gameover() {
+
+  clearTimeout(timer);
+
   // lose condition
   if(timeLeft <= 0) {
     timeLeft = 0;
@@ -170,7 +177,6 @@ function gameover() {
   }
   // win condition
   else {
-    clearTimeout(timer);
     const audio = new Audio('static/Win-fanfare-sound.mp3');
     audio.volume = 0.5;
     audio.play();
@@ -185,70 +191,79 @@ function gameover() {
   document.getElementById('number-incorrect').innerHTML = incorrect + " answered incorrectly";
   document.getElementById('time-remaining').innerHTML = timeLeft + " second(s) left";
 
-  // get the top 5 scores
-  let highscoresOBJ = null;
-  let highscores = null;
-  if(localStorage.getItem('highscores') !== null) {
-    highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
-    highscores = [JSON.parse(highscoresOBJ['1']), JSON.parse(highscoresOBJ['2']), JSON.parse(highscoresOBJ['3']), JSON.parse(highscoresOBJ['4']), JSON.parse(highscoresOBJ['5'])];
-  }
 
-  // console.log(highscores[4]);
+  if (timeLeft > 0) {
+    // get the top 5 scores
+    let highscoresOBJ = null;
+    let highscores = null;
+    if(localStorage.getItem('highscores') !== null) {
+      highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
+      console.log(highscoresOBJ);
+      highscores = [highscoresOBJ['0'], highscoresOBJ['1'], highscoresOBJ['2'], highscoresOBJ['3'], highscoresOBJ['4']];
+    }
 
-  let currHighscore = (correct * timeLeft);
+    // console.log(highscores[4]);
 
-  // if highscores is undefined, set it to be the highest
-  if(highscores === null) {
-    const name = prompt("You got the highest score! What's your name?");
-    const info = JSON.stringify({'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore});
-    console.log(info);
-    const placeholder = JSON.stringify({'name' : ' -- ', 'correct' : 0, 'incorrect' : 0, 'timeLeft' : 0, 'highscore' : 0});
-    localStorage.setItem('highscores',JSON.stringify({1:info, 2:placeholder, 3:placeholder, 4:placeholder, 5:placeholder}));
-  }
+    let currHighscore = (correct * timeLeft);
 
-  // high score is calculated by multiplying the number correct by the seconds left
-  else if (currHighscore > highscores[4].highscore) {
-    alert('hooray');
-    const name = prompt("You got a high score! What's your name?");
-    const info = JSON.stringify({'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore});
-    // ugh... sorting
-    for(let i = 4; i > -1; i++) {
-      const temp = highscores[i];
-      const arrHighscore = temp.highscore;
-      console.log(arrHighscore);
-      if(currHighscore > arrHighscore && i != 0)
-      // go to next array and check
-        continue;
-      else if(currHighscore <= arrHighscore) {
-        alert('You ranked ' + (i+2).tostring());
-        // set new spot at i + 1
-        highscores.splice(i, 0, info);
-        // pop to remove last index
-        highscores.pop();
-        break;
+    // if highscores is undefined, set it to be the highest
+    if(highscores === null) {
+      const name = prompt("You got the highest score! What's your name?");
+      const info = {'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore};
+      const placeholder = {'name' : ' -- ', 'correct' : 0, 'incorrect' : 0, 'timeLeft' : 0, 'highscore' : 0};
+
+      localStorage.setItem('highscores',JSON.stringify({1:info, 2:placeholder, 3:placeholder, 4:placeholder, 5:placeholder}));
+    }
+
+    // high score is calculated by multiplying the number correct by the seconds left
+    // in case of win somewhere
+    else if (currHighscore > highscores[4].highscore) {
+      const name = prompt("You got a high score! What's your name?");
+      const info = {'name' : name, 'correct' : correct, 'incorrect' : incorrect, 'timeleft' : timeLeft, 'highscore' : currHighscore};
+
+      for(let i = 4; i > -1; i--) {
+        const temp = highscores[i];
+        const arrHighscore = temp.highscore;
+
+        // beat current index's score
+        if(currHighscore > arrHighscore && i != 0)
+        // go to next array and check
+          continue;
+        // found a tie, put behind it
+        else if(currHighscore <= arrHighscore) {
+          alert('You ranked ' + (i+2).toString() );
+          // set new spot at i + 1
+          highscores.splice(i + 1, 0, info);
+          // pop to remove last index
+          highscores.pop();
+          break;
+        }
+        // high score
+        else {
+          alert('You got the highest score, congrats!');
+          highscores.splice(i, 0, info);
+          // pop to remove last index
+          highscores.pop();
+          break;
+        }
+
       }
-      else {
-        alert('You got the highest score, congrats!');
-        highscores.splice(i, 0, info);
-        // pop to remove last index
-        highscores.pop();
-        break;
-      }
+      // save to web storage
+      localStorage.setItem('highscores', JSON.stringify(highscores));
 
     }
-    // save to web storage
-    localStorage.setItem('highscores', JSON.stringify(highscores));
 
-  }
-  else if(currHighscore === JSON.parse(highscores['4']).highscore ) {
-    alert('You tied 5th place! Try again!');
-  }
-  // didn't make it to the high scores
-  else if(currHighscore < JSON.parse(highscores['4']).highscore) {
-    alert('You didn\'t make it to the top 5, try again!');
-  }
-  else {
-    // should never get here
-    console.log('something unepected happened');
+    // in case of tie
+    else if(currHighscore === highscores[4].highscore && timeLeft !== 0 ) {
+      alert('You tied 5th place! Try again!');
+    }
+    // didn't make it to the high scores
+    else if(currHighscore < JSON.parse(highscores['4']).highscore) {
+      alert('You didn\'t make it to the top 5, try again!');
+    }
+    else {
+      // should never get here
+      console.log('something unepected happened');
+    }
   }
 }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Timed Test</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- custom sytlesheet -->
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <body>
+
+
+    <div id="background" class=""></div>
+    <!-- TODO fix the #space media query -->
+    <div id="space"></div>
+
+    <div class="container">
+
+      <div class="row" id="header">
+        <div class="col-md-6 col-sm-12">
+          <a href="index.html">Take the quiz</a>
+        </div>
+        <div class="col-md-6 col-sm-12 text-right">
+          <span id="timer"></span>
+        </div>
+      </div>
+
+      <div class="row" id="no-games">
+
+        <div class="col-md-3 col-sm-0"></div>
+
+        <div class="col-md-6 col-sm-12">
+          <div class="text-center my-4">
+            <h2>No scores yet!</h2>
+            <h4><a href="index.html">Play the Game!</a></h4>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-0"></div>
+
+      </div>
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Place</th>
+            <th scope="col">Name</th>
+            <th scope="col">Correct</th>
+            <th scope="col">Time Remaining</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+
+        <tbody id="highscores">
+
+        </tbody>
+        </table>
+
+
+      </div>
+
+  </body>
+
+  <script type="text/javascript">
+
+    // get the top 5 scores
+    let highscoresOBJ = null;
+    let highscores = null;
+    if(localStorage.getItem('highscores') !== null) {
+      highscoresOBJ = JSON.parse(localStorage.getItem('highscores'));
+      highscores = [ highscoresOBJ['0'], highscoresOBJ['1'], highscoresOBJ['2'], highscoresOBJ['3'], highscoresOBJ['4']];
+
+      console.log(highscores);
+
+      const table = document.getElementById('highscores');
+
+      for(let i = 0; i < highscores.length; i++) {
+        const place = i + 1;
+        let time = highscores[i].timeleft;
+        if(time == undefined)
+          time = 0;
+        const row = document.createElement('tr');
+        row.innerHTML = "<th scope='row'>" + place + " </th><td>" + highscores[i]['name'] + "</td><td>" + highscores[i]['correct'] + "</td><td>" + time + "<span> Seconds<span></td><td>" + highscores[i]['highscore'] + "</td>";
+
+        table.append(row);
+
+      }
+
+    }
+
+    else {
+      document.querySelector('table').style.display = 'none';
+      document.querySelector('#no-games').style.display = 'flex';
+    }
+
+
+
+
+  </script>
+
+  </html>
