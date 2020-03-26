@@ -26,17 +26,11 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
-
-### Review
-
-You are required to submit the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+## What the code does
+- Allow the user to start a game
+- A game starts at 30 seconds with 10 questions to answer
+- Correct answers give you 5 seconds, incorrect you lose 5 seconds
+- The objective is to answer as many questions correctly in as little time possible
+- Top 5 scores are honored with a place in the high scores table
+- Starting a new game refreshes the page
