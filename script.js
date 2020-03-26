@@ -2,54 +2,54 @@
 // js object for questions
 const Questions = {
   1 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "Which of these is a legal variable declaration keyword?",
+    options : ['let', 'const', 'var', 'All of the above'],
+    correct : 'All of the above'
   } ,
   2 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "What does 'DOM' stand for?",
+    options : ['Document Object Model', 'Drop Operation Mechanics', 'Drink Only Margaritas', 'Document Object Method'],
+    correct : 'Document Object Model'
   },
   3 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "Which of these is not a JavaScript framework?",
+    options : ['jQuery', 'Angular', 'Bootstrap', 'Vue'],
+    correct : 'Bootstrap'
   },
   4 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "What would the result of i + 1 where i = 'Hello there'?",
+    options : ['NaN', 'Hello there1', 'H1e1l1l1o1 1t1h1e1r1e1', 'undefined'],
+    correct : 'Hello there1'
   },
   5 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "How long did it take for JavaScript to be developed originally?",
+    options : ['10 days', '6 months', '4 years', '2 years, 3 months'],
+    correct : '10 days'
   },
   6 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "Where can JavaScript be used??",
+    options : ['Client side', 'Server side', 'Robotics', 'Anywhere'],
+    correct : 'Anywhere'
   },
   7 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "What does the '===' symbol do?",
+    options : ['Compare two values', 'Compare two values and their types', 'Set a value to a variable', 'Nothing, it would throw an error'],
+    correct : 'Compare two values and their types'
   },
   8 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "What is the purpose of a global variable?",
+    options : ['Available anywhere in the code', 'Available in any function, but not outside them', 'They enjoy traveling', 'They cannot be changed once declared'],
+    correct : 'Available anywhere in the code'
   },
   9 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "What is the purpose of the 'this' keyword?",
+    options : ['Refers to the document', 'Refers to the object in a method', 'Refers to the computer', 'Refers to the script'],
+    correct : 'Refers to the object in a method'
   },
   10 : {
-    question: "What color is red?",
-    options : ['Red', 'Orange', 'Green', 'Blue'],
-    correct : 'Red'
+    question: "Select the line of code that would assign an element to a variable. ",
+    options : ['document.getElementByClass(".myClass");', 'let x = document.getElementBySelector("#my-id")', 'const y = document.getElementById(".my-id")', 'const z = document.getElementById("#my-id")'],
+    correct : 'const z = document.getElementById("#my-id")'
   },
   // shuffle algorithm shamelessly stolen from stackoverflow
   // https://stackoverflow.com/a/6274381/11922025
@@ -75,7 +75,7 @@ let questionIndex;// = 0;
 let correctResponse = "";
 
 // timer stuff
-let timeLeft = 30;
+let timeLeft = 60;
 let timer;
 const timeEl = document.getElementById('timer');
 
@@ -100,7 +100,7 @@ function start(event) {
   // reset the starting parameters
   questionIndex = 0;
   currentQuestion = 1;
-  timeleft = 30;
+  timeleft = 60;
   questionsArr = Questions.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   loadQuestion();
 
@@ -116,7 +116,7 @@ function checkAnswer(event) {
   event.preventDefault();
   if(event.target.innerHTML === question.correct) {
     correct++;
-    timeLeft += 3;
+    timeLeft += 5;
   }
   else {
     incorrect++;
