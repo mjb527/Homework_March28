@@ -100,7 +100,7 @@ function start(event) {
   // reset the starting parameters
   questionIndex = 0;
   currentQuestion = 1;
-  timeleft = 60;
+  timeleft = 30;
   questionsArr = Questions.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   loadQuestion();
 
